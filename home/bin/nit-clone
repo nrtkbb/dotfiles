@@ -1,0 +1,20 @@
+#!/bin/sh
+
+USERNAME=nrtkbb
+SSHNAME=$USERNAME-hub
+
+if [ $# -ne 1 ]; then
+  echo "Specific argument \"git@github.com:$USERNAME/REPONAME\"" 1>&2
+  exit 1
+fi
+
+if [[ $1 =~ ^git@github.com:$USERNAME/|^https://github.com/$USERNAME/ ]]; then
+  REPO=${1/https:\/\/github.com\//}
+  REPO=${REPO/git@github.com:/}
+  echo "rewrite command> git clone $SSHNAME:$REPO"
+  git clone $SSHNAME:$REPO
+  exit 0
+else
+  echo "This argument is not $USERNAME's repository URL. exit." 1>&2
+  exit 1
+fi

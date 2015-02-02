@@ -1,0 +1,4 @@
+set hls
+set ignorecase
+set smartcase
+set vb t_vb=

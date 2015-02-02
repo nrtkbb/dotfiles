@@ -1,0 +1,30 @@
+set ignorecase
+set smartcase
+
+"カーソル位置の単語をyankする
+nnoremap vv vawy
+
+"Insert mode内でEmacsキーバインドを少々使う
+
+inoremap <C-o> <Esc>o
+inoremap <C-h> <BS>
+inoremap <C-a> <Esc>0i
+inoremap <C-e> <Esc>:LineEnd<CR>a
+inoremap <C-f> <Esc><Right>a
+inoremap <C-b> <Esc>i
+inoremap <C-d> <Esc><Right>xi
+
+
+" search
+"nnoremap n nzz
+"nnoremap N Nzz
+"nnoremap * *zz
+"nnoremap # #zz
+
+"次のメンバ(フィールド,メソッド)
+eclipseaction GoNextMember org.eclipse.jdt.ui.edit.text.java.goto.next.member
+nnoremap mm :GoNextMember<C-m>
+
+"前のメンバ(フィールド,メソッド)
+eclipseaction GoPrevMember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
+nnoremap mp :GoPrevMember<C-m>

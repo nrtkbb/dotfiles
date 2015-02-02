@@ -1,0 +1,16 @@
+#!/bin/sh
+
+DROPBOX_MEMO_DIR="~/Dropbox/_dailyMemo/"
+
+if [ $# != 1 ]; then
+  (LANG=C; date "+$DROPBOX_MEMO_DIR%F(%a).md") # カッコの中は、抜けた時にリセットされる
+else
+  if [[ $1 =~ ^\+?-?(0x)?[0-9]*$ ]] ; then     # 数値かどうかの判定
+    DIFF=$(( $1 + 1 - 1 ))                     # 数値型に変換
+    PLUS=""
+    [[ $DIFF > 0 ]] && PLUS="+"
+    (LANG=C; date -v$PLUS$DIFF"d" "+$DROPBOX_MEMO_DIR%F(%a).md")
+  else
+    (LANG=C; date "+$DROPBOX_MEMO_DIR%F(%a).md")
+  fi
+fi
