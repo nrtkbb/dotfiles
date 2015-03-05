@@ -33,6 +33,16 @@ NeoBundle 'kana/vim-submode'
 NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'rcmdnk/vim-markdown'
 NeoBundle 'toyamarinyon/vim-swift'
+NeoBundle 'alpaca-tc/alpaca_tags'
+NeoBundle 'tpope/vim-rails'
+NeoBundle 'slim-template/vim-slim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'vim-scripts/rdark'
+
+NeoBundleLazy 'OrangeT/vim-csharp', {
+\   'autoload': { 'filetypes': [ 'cs', 'csi', 'csx' ] }
+\ }
 
 " vim-scripts repos
 NeoBundle 'YankRing.vim'
@@ -46,8 +56,8 @@ NeoBundleCheck
 :source $VIMRUNTIME/macros/matchit.vim
 let b:match_words = "if:endif,foreach:endforeach,\<begin\>:\<end\>"
 
-" インデントを2にして、タブ文字は4文字のままにする（わざと崩れて表示させる）
-set expandtab tabstop=4 shiftwidth=2
+" インデントを4にして、タブ文字は8文字のままにする（わざと崩れて表示させる）
+set expandtab tabstop=8 shiftwidth=4
 "set tabstop=4 shiftwidth=4 softtabstop=4
 
 " 連続コピペ出来ない問題の解決
@@ -259,3 +269,21 @@ let g:lightline = {
 
 set t_Co=256
 
+augroup AlpacaTags
+  autocmd!
+  if exists(':Tags')
+    autocmd BufWritePost Gemfile TagsBundle
+    autocmd BufEnter * TagsSet
+    " 毎回保存と同時更新する場合はコメントを外す
+    autocmd BufWritePost * TagsUpdate
+  endif
+augroup END
+
+" https://github.com/scrooloose/syntastic#3-recommended-settings
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

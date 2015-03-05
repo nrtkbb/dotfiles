@@ -1,5 +1,5 @@
 syntax on
-colorscheme desert
+colorscheme rdark
 set guioptions-=T 
 set guifont=Ricty\ Regular:h13
-set lines=80 columns=120
+set lines=64 columns=113

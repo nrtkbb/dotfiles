@@ -9,7 +9,7 @@
     interactive = auto
     grep = auto
 [core]
-    excludesfile = ~/.gitignore
+	excludesfile = /Users/baba/.gitignore
 [alias]
     # peco関連
     bdpeco = "!f() { git branch | cut -b 3- | peco ; }; git branch -d `f`"
@@ -39,6 +39,7 @@
     # logをtree表示
     log-graph = log --graph --date=short --pretty=format:'%Cgreen%h %cd %Cblue%cn %Creset%s'
     log-all = log --graph --all --color --pretty='%x09%h %cn%x09%s %Cred%d%Creset'
+    graph = log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset'
     # diff関連
     dm = diff master           # masterとのdiff
     dw = diff --color-words    # 単語単位でいろつけてdiff
@@ -55,11 +56,17 @@
     sclone = svn clone --prefix svn/
     # gc関連
     gca = gc --aggressive
+    ksdiff = difftool
+    checkout-pull-request = !sh -c 'git fetch origin pull/$1/head:pr-$1 && git checkout pr-$1' -
 [difftool "sourcetree"]
 	cmd = /usr/local/bin/ksdiff -w \"$LOCAL\" \"$REMOTE\"
 	path = 
+[difftool "ksdiff"]
+    cmd = "/usr/local/bin/ksdiff $LOCAL $REMOTE"
+[diff]
+    tool = ksdiff
 [mergetool "sourcetree"]
-	cmd = /usr/local/bin/ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [tig "bind"]
     generic = g move-first-line
