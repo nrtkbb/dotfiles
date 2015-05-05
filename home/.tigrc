@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+
+# グラフに使用する文字コードを指定する
+set line-graphics = utf-8
+
+
+# main viewの左端にコミットIDを表示して、dateとautherは短いやつに変更
+set main-view = id date:short author:email-user commit-title:graph=yes,refs=yes
+# デフォルト
+# set main-view = date author commit-title:graph=yes,refs=yes
+
+set blame-view  = id date:default author:email-user file-name:auto line-number:no,interval=5 text
+
+
+# 画面を垂直方向に分割する
+# set vertical-split = yes
+# 横分割に強制する
+set vertical-split = no
+# デフォルト値
+# set vertical-split = auto
+
+
+# 水平分割したウィンドウの下画面サイズを % で指定（行数指定も可）
+# デフォルト値は 66%
+set split-view-height = 73%
+#set split-view-height = 66%
+
+
+# 差分の前後の表示行数（diff-context)を指定 
+# デフォルト値は 3行
+set diff-context = 4
