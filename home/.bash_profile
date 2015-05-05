@@ -6,6 +6,7 @@ export PATH=/usr/local/share/npm/bin:$PATH
 export PATH=/usr/local/mysql/bin:$PATH
 export PATH=/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform-tools:$PATH
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
+export MAYA_UI_LANGUAGE=en_US
 
 # for rbenv
 eval "$(rbenv init -)"
@@ -64,6 +65,7 @@ alias mvi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@
 alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 alias glog="git log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset'"
 alias mysql="mysql --pager='less -n -i -S -F -X'"
+alias maya2015="/Applications/Autodesk/maya2015/Maya.app/Contents/bin/maya"
 
 export GIT_EDITOR=vim
 export SVN_EDITOR=vim
