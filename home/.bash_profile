@@ -46,6 +46,12 @@ function proml {
 }
 proml
 
+# hubコマンドを補完するやつ
+HUB_COMP=/usr/local/opt/hub/etc/bash_completion.d/hub.bash_completion.sh
+if [ -f $HUB_COMP ]; then
+  source $HUB_COMP
+fi
+
 # git diff を単語単位で見やすくする
 DIFF_HIGHLIGHT="/usr/local/opt/git/share/git-core/contrib/diff-highlight/"
 if [ -d $DIFF_HIGHLIGHT ]; then
