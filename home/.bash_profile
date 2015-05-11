@@ -8,6 +8,9 @@ export PATH=/usr/local/opt/android-sdk/tools:/usr/local/opt/android-sdk/platform
 export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
 export MAYA_UI_LANGUAGE=en_US
 
+# 履歴検索を逆にする時はCtrl-Sを使う
+stty stop undef
+
 # for rbenv
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/shims:$PATH"
@@ -44,6 +47,12 @@ function proml {
   PS1="[\[\033[36m\]\w\[\033[0m\]]\$(parse_git_branch)\n\$ "
 }
 proml
+
+# hubコマンドを補完するやつ
+HUB_COMP=/usr/local/opt/hub/etc/bash_completion.d/hub.bash_completion.sh
+if [ -f $HUB_COMP ]; then
+  source $HUB_COMP
+fi
 
 # git diff を単語単位で見やすくする
 DIFF_HIGHLIGHT="/usr/local/opt/git/share/git-core/contrib/diff-highlight/"
