@@ -12,8 +12,10 @@ export MAYA_UI_LANGUAGE=en_US
 stty stop undef
 
 # for rbenv
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/shims:$PATH"
+if [ "$(uname)" == 'Darwin' ]; then
+  eval "$(rbenv init -)"
+  export PATH="$HOME/.rbenv/shims:$PATH"
+fi
 
 # for work
 DOTS_WORK="$HOME/.bash_profile_work"
@@ -39,14 +41,16 @@ if [ -d $CHEF_PATH ]; then
 fi
 
 # gitコマンドを補完するやつ
-source /usr/local/etc/bash_completion.d/git-completion.bash
-function parse_git_branch {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1)/"
-}
-function proml {
-  PS1="[\[\033[36m\]\w\[\033[0m\]]\$(parse_git_branch)\n\$ "
-}
-proml
+if [ "$(uname)" == 'Darwin' ]; then
+  source /usr/local/etc/bash_completion.d/git-completion.bash
+  function parse_git_branch {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1)/"
+  }
+  function proml {
+    PS1="[\[\033[36m\]\w\[\033[0m\]]\$(parse_git_branch)\n\$ "
+  }
+  proml
+fi
 
 # hubコマンドを補完するやつ
 HUB_COMP=/usr/local/opt/hub/etc/bash_completion.d/hub.bash_completion.sh
@@ -68,13 +72,17 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../../'
-alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias mvi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
-alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
 alias glog="git log --graph --pretty='format:%C(yellow)%h%Cblue%d%Creset %s %C(white)%an, %ar%Creset'"
 alias mysql="mysql --pager='less -n -i -S -F -X'"
-alias maya2015="/Applications/Autodesk/maya2015/Maya.app/Contents/bin/maya"
+
+if [ "$(uname)" == 'Darwin' ]; then
+  alias vi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+  alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+  alias mvi='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+  alias mvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim "$@"'
+  alias maya2015="/Applications/Autodesk/maya2015/Maya.app/Contents/bin/maya"
+fi
+
 
 export GIT_EDITOR=vim
 export SVN_EDITOR=vim
